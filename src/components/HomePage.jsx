@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../logo.svg'
+import { Link } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import '../App.css';
 
@@ -14,8 +15,9 @@ export default function HomePage() {
                 />
                 <h1>Welcome to RevHeads</h1>
                 <div className="buttonDiv">
-                    <Button>LOGIN</Button>
-                    <Button>SIGN UP</Button>
+                    <Link to="/login"><Button>LOGIN</Button></Link>
+                    <br/>
+                    <Link to="/register"><Button>SIGN UP</Button></Link>
                 </div>
             </header>
         </div>
