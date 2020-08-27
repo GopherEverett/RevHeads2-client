@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormControl } from 'reactstrap';
 import Bar from './Navbar';
 import LoaderButton from './LoaderButton'
 import { withCookies, useCookies } from 'react-cookie'
@@ -23,16 +23,12 @@ export default function Login(props) {
                 email: email,
                 password: password
             }, { withCredentials: true })
-            console.log(res)
             setCookie('username', res.data.data.username, { path: '/' })
             setCookie('userid', res.data.data.id, { path: '/' })
             setCookie('name', res.data.data.name, { path: '/' })
             setCookie('location', res.data.data.location, { path: '/' })
             setCookie('created_at', res.data.data.created_at, { path: '/' })
             setCookie('photo_url', res.data.data.photo_url, { path: '/' })
-            // auth.login(() => {
-            //     setLoggedin(auth.isAuthenticated())
-            // })
             setTimeout(() => setToProfile(true), 2000)
         }
         catch (err) {

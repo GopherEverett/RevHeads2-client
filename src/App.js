@@ -1,6 +1,6 @@
 import React  from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import BuilderList from './components/BuilderList';
+import AllBuilders from './components/AllBuilders.jsx';
 // import Builder from './components/Builder';
 import Car from './components/Car';
 // import Bar from './components/Navbar';
@@ -37,7 +37,7 @@ function App() {
           <Route exact path='/register' component={Register} />
           <Route exact path='/mygarage' component={Garage} />
           <Route exact path='/profile' component={BuilderProfile} />
-          {/* <Route exact path='/builders' component={BuilderList} /> */}
+          <Route exact path='/builders' component={AllBuilders} />
           {/* <Route exact path='/cars/' component={CarList} /> */}
           {/* <Route exact path='/builders/:id' component={Builder} /> */}
           <Route exact path='/cars/:id' component={Car} />

@@ -40,6 +40,14 @@
 
 h2 {
   color: white;
+  font-size: 40px;
+  text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+h4 {
+  color: white;
+  font-size: 26px;
+  text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 
 .submitForm {
@@ -56,7 +64,7 @@ h2 {
 }
 
 .carimg {
-  max-width: 20%;
+  max-width: 100%;
   border-radius: 5px;
 }
 
@@ -78,16 +86,63 @@ h2 {
   margin: 5px;
 }
 
-
 .builderProf {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  margin-top: 25px;
 }
 
 .carCard {
-  width: 50vw;
+  width: 60vw;
+  background-color: black;
+}
+
+.emptyCar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60vw;
+  background-color: black;
+}
+
+.carname {
+  color: white;
+  font-size: 40px;
+  text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+.singleCar {
+  background-color: black;
+  margin: 5px;
+  width: 400px;
+}
+
+.overlay {
+  margin: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.overlay h3 {
+  color: white;
+  font-size: 40px;
+  text-shadow: -1px 1px 2px #000, 1px 1px 2px #000, 1px -1px 0 #000, -1px -1px 0 #000;
+}
+
+.carDiv {
+  /* display: flex; */
+  flex-wrap: flex;
+  flex-direction: row;
+}
+
+.userCard {
+  background-color: black;
+  width: 40vw;
+  color: white;
+  font-family: Prompt;
 }
 
 .builderProf h2 {
@@ -99,5 +154,11 @@ h2 {
 @media (max-width: 650px) {
   .carCard {
     width: 100vw;
+  }
+  .buttonDiv {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }

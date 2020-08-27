@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Link, Redirect, useParams } from 'react-router-dom'
+import Bar from './Navbar'
 import { Button, Card, CardImg, CardText, CardTitle, CardBody, Col } from 'reactstrap'
 // import AddProjectForm from './AddProjectForm'
 
@@ -83,8 +84,9 @@ export default function Car() {
 
     return (
         <>
-            {redir ? <Redirect to='/builderprofile' /> :
+            {redir ? <Redirect to='/mygarage' /> :
                 null}
+            <Bar />
             <Col sm="12" md={{ size: 6, offset: 3 }} style={{ fontFamily: "Prompt" }}>
                 <br />
                 <Card style={{ backgroundColor: "rgba(242, 244, 247, .7)" }}>
