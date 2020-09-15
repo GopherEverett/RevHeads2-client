@@ -14,6 +14,8 @@ import HomePage from './components/HomePage'
 import styled from 'styled-components';
 import img from './images/francesco-ungaro-1208184-unsplash.jpg'
 import BuilderProfile from './components/BuilderProfile';
+import VinSearch from './components/VinSearch.jsx';
+import AllCars from './components/AllCars.jsx';
 
 const Body = styled.div`
   background-image: url(${img});
@@ -38,12 +40,11 @@ function App() {
           <Route exact path='/mygarage' component={Garage} />
           <Route exact path='/profile' component={BuilderProfile} />
           <Route exact path='/builders' component={AllBuilders} />
-          {/* <Route exact path='/cars/' component={CarList} /> */}
-          {/* <Route exact path='/builders/:id' component={Builder} /> */}
+          <Route exact path='/cars' component={AllCars} />
           <Route exact path='/cars/:id' component={Car} />
           {/* <Route exact path='/projects/:id' component={Project} /> */}
           {/* <Route exact path='/projects/' component={CarList} /> */}
-          {/* <Route exact path='/vinlookup/' component={VinLookup} /> */}
+          <Route exact path='/vinlookup' component={VinSearch} />
         </Switch>
       </Body>
     </Router>

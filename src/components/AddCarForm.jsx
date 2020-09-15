@@ -16,7 +16,7 @@ const submitCar = async (e) => {
     e.preventDefault()
     setIsLoading(true)
     try {
-        const res = await Axios.post(`http://localhost:8000/api/v1/cars/`, {
+        const res = await Axios.post(`https://revheads-backend.herokuapp.com/api/v1/cars/`, {
             make: make,
             model: model,
             year: year,

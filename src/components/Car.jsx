@@ -23,12 +23,12 @@ export default function Car() {
 
 
     async function fetchProjects() {
-        const res = await Axios.get(`http://localhost:8000/api/v1/projects/projectsbycar/${id}`, { withCredentials: true })
+        const res = await Axios.get(`https://revheads-backend.herokuapp.com/api/v1/projects/projectsbycar/${id}`, { withCredentials: true })
         setProjects(res.data.data)
     }
 
     async function fetchCar() {
-        const res = await Axios.get(`http://localhost:8000/api/v1/cars/${id}`, { withCredentials: true })
+        const res = await Axios.get(`https://revheads-backend.herokuapp.com/api/v1/cars/${id}`, { withCredentials: true })
         setCar(res.data.data)
     }
 
@@ -47,9 +47,8 @@ export default function Car() {
     }
 
     const updateVote = async () => {
-        console.log(car)
         try {
-            await Axios.put(`http://localhost:8000/api/v1/cars/${id}`, {
+            await Axios.put(`https://revheads-backend.herokuapp.com/api/v1/cars/${id}`, {
                 builder: updatedCar.builder.id,
                 make: updatedCar.make,
                 name: updatedCar.name,
@@ -67,7 +66,7 @@ export default function Car() {
 
     const handleDelete = async () => {
         try {
-            const res = await Axios.delete(`http://localhost:8000/api/v1/cars/${id}`, { withCredentials: true })
+            const res = await Axios.delete(`https://revheads-backend.herokuapp.com/api/v1/cars/${id}`, { withCredentials: true })
             setRedir(true)
             console.log(res)
         }
@@ -89,7 +88,7 @@ export default function Car() {
             <Bar />
             <Col sm="12" md={{ size: 6, offset: 3 }} style={{ fontFamily: "Prompt" }}>
                 <br />
-                <Card style={{ backgroundColor: "rgba(242, 244, 247, .7)" }}>
+                <Card className="userCard">
                     <CardBody>
                         {car ?
                             <>

@@ -15,7 +15,7 @@ function Bar(props) {
     const logOutUser = async (e) => {
         e.preventDefault()
         try {
-            await Axios.get('http://localhost:8000/user/logout', { withCredentials: true })
+            await Axios.get('https://revheads-backend.herokuapp.com/user/logout', { withCredentials: true })
             removeCookie('username', { path: '/' })
             removeCookie('userid', { path: '/' })
             removeCookie('name', { path: '/' })
@@ -34,7 +34,7 @@ function Bar(props) {
             {redir ?
                 <Redirect to="/" /> :
                 <Navbar color='light' light sticky={'top'} style={{ fontFamily: "Prompt" }}>
-                    <NavbarBrand href="/" className="mr-auto">
+                    <NavbarBrand className="mr-auto">
                         <img src={logo} alt='' />
                     </NavbarBrand><Button outline color="secondary" className="mr-2" onClick={() => history.goBack()}>⬅︎ Back</Button>
                     {cookies['username'] ?

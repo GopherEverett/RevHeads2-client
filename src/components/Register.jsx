@@ -21,7 +21,7 @@ function Register(props) {
         e.preventDefault()
         setIsLoading(true)
         try {
-            const res = await Axios.post(`http://localhost:8000/user/register`, {
+            const res = await Axios.post(`https://revheads-backend.herokuapp.com/user/register`, {
                 username: username,
                 email: email,
                 password: password,
@@ -119,3 +119,4 @@ function Register(props) {
     )
 }
 export default withCookies(Register)
+

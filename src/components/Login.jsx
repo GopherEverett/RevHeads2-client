@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
-import { Form, FormGroup, Label, Input, FormControl } from 'reactstrap';
+import { Redirect, Link } from 'react-router-dom'
+import { Form, FormGroup, Label, Input, FormControl, Button } from 'reactstrap';
 import Bar from './Navbar';
 import LoaderButton from './LoaderButton'
 import { withCookies, useCookies } from 'react-cookie'
@@ -13,23 +13,33 @@ export default function Login(props) {
     const [toProfile, setToProfile] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [cookies, setCookie, removeCookie] = useCookies('username')
+    const [message, setMessage] = useState(null)
 
     const submitUser = async (e) => {
         e.preventDefault()
         setIsLoading(true)
         try {
-            const res = await Axios.post(`http://localhost:8000/user/login`, {
+            const res = await Axios.post(`https://revheads-backend.herokuapp.com/user/login`, {
                 username: username,
                 email: email,
                 password: password
-            }, { withCredentials: true })
-            setCookie('username', res.data.data.username, { path: '/' })
-            setCookie('userid', res.data.data.id, { path: '/' })
-            setCookie('name', res.data.data.name, { path: '/' })
-            setCookie('location', res.data.data.location, { path: '/' })
-            setCookie('created_at', res.data.data.created_at, { path: '/' })
-            setCookie('photo_url', res.data.data.photo_url, { path: '/' })
-            setTimeout(() => setToProfile(true), 2000)
+            })
+            if (res.data.status.code === 401) {
+                setEmail('')
+                setUsername('')
+                setPassword('')
+                setMessage(res.data.status.message)
+                setIsLoading(false)
+            }
+            else {
+                setCookie('username', res.data.data.username, { path: '/' })
+                setCookie('userid', res.data.data.id, { path: '/' })
+                setCookie('name', res.data.data.name, { path: '/' })
+                setCookie('location', res.data.data.location, { path: '/' })
+                setCookie('created_at', res.data.data.created_at, { path: '/' })
+                setCookie('photo_url', res.data.data.photo_url, { path: '/' })
+                setTimeout(() => setToProfile(true), 2000)
+            }
         }
         catch (err) {
             console.log(err)
@@ -43,6 +53,15 @@ export default function Login(props) {
             <div className="builderProf">
                 {toProfile ? <Redirect to={'/profile'} /> : null}
                 <h2 className="formTitle">LOGIN</h2>
+                    {message ? (
+                        <div className='loginErrorDiv'>
+                            <h3 className="loginError">{message}</h3>
+                            <h3 className="loginError">try again or sign up</h3>
+                        </div>
+                    )
+                        :
+                        null
+                    }
                 <Form inline onSubmit={submitUser} className="submitForm" style={{ fontFamily: "Prompt" }}>
                     <FormGroup>
                         <Label for="username" hidden>Name</Label>
@@ -62,6 +81,7 @@ export default function Login(props) {
                             type="email"
                             name="email" id="email"
                             placeholder="Email"
+                            value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </FormGroup>
@@ -73,10 +93,18 @@ export default function Login(props) {
                             name="password"
                             id="password"
                             placeholder="Password"
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)} />
                     </FormGroup>
                     <br />
-                    <LoaderButton isLoading={isLoading}>Submit</LoaderButton>
+                    <>
+                        <LoaderButton isLoading={isLoading}>Submit</LoaderButton>
+                        <br/>
+                        {message ?
+                            <Link to='/register'><Button>SIGN UP</Button></Link> :
+                            null
+                        }
+                    </>
                 </Form>
             </div>
         </>

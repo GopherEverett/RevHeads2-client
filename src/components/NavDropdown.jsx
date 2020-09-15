@@ -19,7 +19,6 @@ export default function NavDropdown(props) {
                 <DropdownItem header>Go To:</DropdownItem>
                 <DropdownItem><Link to="/builders" style={{ textDecoration: 'none', color: 'blue' }}>Builders</Link></DropdownItem>
                 <DropdownItem><Link to="/cars" style={{ textDecoration: 'none', color: 'blue' }}>Cars</Link></DropdownItem>
-                <DropdownItem><Link to="/vinlookup" style={{ textDecoration: 'none', color: 'blue' }}>Get Car Info by VIN</Link></DropdownItem>
                 {cookies['username'] ?
                 <>
                     <DropdownItem><Link to="/mygarage" style={{ textDecoration: 'none', color: 'blue' }}>{props.cookies.cookies.username}'s Garage</Link></DropdownItem>
@@ -27,6 +26,7 @@ export default function NavDropdown(props) {
                     </> :
                     null
                 }
+                <DropdownItem><Link to="/vinlookup" style={{ textDecoration: 'none', color: 'blue' }}>Get Car Info by VIN</Link></DropdownItem>
             </DropdownMenu>
         </Dropdown>
     )

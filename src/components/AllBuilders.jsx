@@ -10,9 +10,8 @@ export default function AllBuilders() {
     const [builders, setBuilders] = useState(null)
     useEffect(() => {
         async function fetchBuilders() {
-            const res = await Axios.get(`http://localhost:8000/user/`)
+            const res = await Axios.get(`https://revheads-backend.herokuapp.com/user/`)
             setBuilders(res.data.data)
-            console.log(builders)
         }
         fetchBuilders()
     }, [])

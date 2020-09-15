@@ -16,7 +16,7 @@ function Garage(props) {
     }
 
     const fetchCars = async () => {
-        const res = await Axios.get(`http://localhost:8000/api/v1/cars/carsbybuilder/${cookies.userid}`, { withCredentials: true })
+        const res = await Axios.get(`https://revheads-backend.herokuapp.com/api/v1/cars/carsbybuilder/${cookies.userid}`, { withCredentials: true })
         setCars(res.data.data)
     }
 
@@ -76,7 +76,7 @@ function Garage(props) {
                 {addform ?
                     <AddCarForm fetchCars={fetchCars} builder={props.cookies.cookies.userid} toggle={toggleForm} />
                     :
-                    <Button color="success" onClick={() => toggleForm()}>+ Car</Button>}
+                    <Button className='addCarButton' color="success" onClick={() => toggleForm()}>+ Car</Button>}
             </div>
         </>
     )
