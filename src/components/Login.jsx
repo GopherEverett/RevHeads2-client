@@ -23,7 +23,7 @@ export default function Login(props) {
                 username: username,
                 email: email,
                 password: password
-            })
+            }, { withCredentials: true })
             if (res.data.status.code === 401) {
                 setEmail('')
                 setUsername('')

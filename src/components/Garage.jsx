@@ -20,13 +20,6 @@ function Garage(props) {
         setCars(res.data.data)
     }
 
-    // useEffect(() => {
-    //     async function fetchCars() {
-    //         const res = await Axios.get(`http://localhost:8000/api/v1/cars/carsbybuilder/${cookies.userid}`, { withCredentials: true })
-    //         setCars(res.data.data)
-    //     }
-    //     fetchCars()
-    // }, [])
 
     useEffect(() => {
         fetchCars()
