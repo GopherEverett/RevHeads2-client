@@ -51,7 +51,8 @@ export default function Login(props) {
         <>
             <Bar />
             <div className="builderProf">
-                {toProfile ? <Redirect to={'/profile'} /> : null}
+                {/* {toProfile ? <Redirect to={'/profile'} /> : null} */}
+                {toProfile && <Redirect to={'/profile'} />}
                 <h2 className="formTitle">LOGIN</h2>
                     {message ? (
                         <div className='loginErrorDiv'>
@@ -71,6 +72,7 @@ export default function Login(props) {
                             id="username"
                             placeholder="Username"
                             value={username}
+                            autoComplete='username'
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </FormGroup>
@@ -81,6 +83,7 @@ export default function Login(props) {
                             type="email"
                             name="email" id="email"
                             placeholder="Email"
+                            autoComplete='email'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -94,6 +97,7 @@ export default function Login(props) {
                             id="password"
                             placeholder="Password"
                             value={password}
+                            autoComplete="current-password"
                             onChange={(e) => setPassword(e.target.value)} />
                     </FormGroup>
                     <br />

@@ -4,9 +4,11 @@ import { withCookies, useCookies } from 'react-cookie'
 import Bar from './Navbar'
 import Moment from 'react-moment'
 import Axios from 'axios'
+import EditProfileForm from './EditProfileForm'
 
 function BuilderProfile() {
     const [user, setUser] = useState(null)
+    const [showForm, setShowform] = useState(false)
     const [cookies, setCookie, removeCookie] = useCookies('username')
     return (
         <>
@@ -24,6 +26,10 @@ function BuilderProfile() {
                         </CardImgOverlay>
                     </CardBody>
                 </Card>
+                {showForm ?
+                <EditProfileForm setShowform={setShowform}/>:
+                <Button onClick={() => setShowform(true)}>Edit Profile</Button>
+                }
             </div>
         </>
     )
