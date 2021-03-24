@@ -83,8 +83,7 @@ export default function Car() {
 
     return (
         <>
-            {redir ? <Redirect to='/mygarage' /> :
-                null}
+            {redir && <Redirect to='/mygarage' />}
             <Bar />
             <Col sm="12" md={{ size: 6, offset: 3 }} style={{ fontFamily: "Prompt" }}>
                 <br />

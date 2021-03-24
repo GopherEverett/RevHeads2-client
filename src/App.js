@@ -1,16 +1,11 @@
 import React  from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AllBuilders from './components/AllBuilders.jsx';
-// import Builder from './components/Builder';
 import Car from './components/Car';
-// import Bar from './components/Navbar';
 import Login from './components/Login';
 import Garage from './components/Garage'
 import Register from './components/Register'
-// import CarList from './components/CarList';
 import HomePage from './components/HomePage'
-// import Project from './components/Project';
-// import VinLookup from './components/VinLookup';
 import styled from 'styled-components';
 import img from './images/francesco-ungaro-1208184-unsplash.jpg'
 import BuilderProfile from './components/BuilderProfile';
@@ -31,7 +26,6 @@ const Body = styled.div`
 function App() {
   return (
     <Router>
-      {/* <Bar /> */}
       <Body>
         <Switch>
           <Route exact path='/' component={HomePage} />
