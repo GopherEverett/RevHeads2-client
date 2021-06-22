@@ -1,62 +1,49 @@
 import React, { useState } from 'react'
 import { Redirect, Link } from 'react-router-dom'
 import { Form, FormGroup, Label, Input, FormControl, Button } from 'reactstrap';
-import SweetAlert from 'react-bootstrap-sweetalert'
 import Bar from './Navbar';
 import LoaderButton from './LoaderButton'
-import { withCookies, useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie'
 import Axios from 'axios'
 
 export default function Login(props) {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
     const [toProfile, setToProfile] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [cookies, setCookie, removeCookie] = useCookies('username')
     const [message, setMessage] = useState(null)
-    const [alert, setAlert] = useState(false)
-
-    const onConfirm = () => {
-        setAlert(false)
-    }
 
     const submitUser = async (e) => {
         e.preventDefault()
-
-        if (password !== confirmPassword) {
-            setAlert(true)
-        }
-        else {
-            setIsLoading(true)
-            try {
-                const res = await Axios.post(`https://revheads-backend.herokuapp.com/user/login`, {
-                    username: username,
-                    email: email,
-                    password: password
-                }, { withCredentials: true })
-                if (res.data.status.code === 401) {
-                    setEmail('')
-                    setUsername('')
-                    setPassword('')
-                    setMessage(res.data.status.message)
-                    setIsLoading(false)
-                }
-                else {
-                    setCookie('username', res.data.data.username, { path: '/' })
-                    setCookie('userid', res.data.data.id, { path: '/' })
-                    setCookie('name', res.data.data.name, { path: '/' })
-                    setCookie('location', res.data.data.location, { path: '/' })
-                    setCookie('created_at', res.data.data.created_at, { path: '/' })
-                    setCookie('photo_url', res.data.data.photo_url, { path: '/' })
-                    setTimeout(() => setToProfile(true), 2000)
-                }
-            }
-            catch (err) {
-                console.log(err)
+        setIsLoading(true)
+        try {
+            const res = await Axios.post(`https://revheads-backend.herokuapp.com/user/login`, {
+                username: username,
+                email: email,
+                password: password
+            }, { withCredentials: true })
+            if (res.data.status.code === 401) {
+                setEmail('')
+                setUsername('')
+                setPassword('')
+                setMessage(res.data.status.message)
                 setIsLoading(false)
             }
+            else {
+                setCookie('username', res.data.data.username, { path: '/' })
+                setCookie('userid', res.data.data.id, { path: '/' })
+                setCookie('name', res.data.data.name, { path: '/' })
+                setCookie('location', res.data.data.location, { path: '/' })
+                setCookie('created_at', res.data.data.created_at, { path: '/' })
+                setCookie('photo_url', res.data.data.photo_url, { path: '/' })
+                setTimeout(() => setToProfile(true), 2000)
+            }
+        }
+        catch (err) {
+            console.log(err)
+            setIsLoading(false)
         }
     }
 
@@ -73,11 +60,6 @@ export default function Login(props) {
                     </div>
                 )
                 }
-                {alert && <SweetAlert
-                    title={"Passwords do not match"}
-                    onConfirm={onConfirm}
-                />
-                    }
                 <Form inline onSubmit={submitUser} className="submitForm" style={{ fontFamily: "Prompt" }}>
                     <FormGroup>
                         <Label for="username" hidden>Name</Label>
@@ -114,18 +96,6 @@ export default function Login(props) {
                             value={password}
                             autoComplete="current-password"
                             onChange={(e) => setPassword(e.target.value)} />
-                    </FormGroup>
-                    <br />
-                    <FormGroup>
-                        <Label for="confirmPassword" hidden>Confirm Password</Label>
-                        <Input
-                            type="password"
-                            name="confirmPassword"
-                            id="confirmPassword"
-                            placeholder=" Confirm Password"
-                            value={confirmPassword}
-                            autoComplete="current-password"
-                            onChange={(e) => setConfirmPassword(e.target.value)} />
                     </FormGroup>
                     <br />
                     <>

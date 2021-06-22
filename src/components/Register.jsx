@@ -5,6 +5,7 @@ import LoaderButton from './LoaderButton'
 import Bar from './Navbar'
 import { withCookies, useCookies } from 'react-cookie'
 import Axios from 'axios'
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 function Register(props) {
     const [username, setUsername] = useState('')
@@ -15,31 +16,42 @@ function Register(props) {
     const [password, setPassword] = useState('')
     const [toCars, setToCars] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [cookies, setCookie ] = useCookies('username')
+    const [cookies, setCookie] = useCookies('username')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [alert, setAlert] = useState(false)
+
+    const onConfirm = () => {
+        setAlert(false)
+    }
 
     const submitUser = async (e) => {
         e.preventDefault()
-        setIsLoading(true)
-        try {
-            const res = await Axios.post(`https://revheads-backend.herokuapp.com/user/register`, {
-                username: username,
-                email: email,
-                password: password,
-                name: name,
-                photo_url: photo,
-                location: location
-            }, { withCredentials: true })
-            setCookie('username', res.data.data.username, { path: '/' })
-            setCookie('userid', res.data.data.id, { path: '/' })
-            setCookie('name', res.data.data.name, { path: '/' })
-            setCookie('location', res.data.data.location, { path: '/' })
-            setCookie('created_at', res.data.data.created_at, { path: '/' })
-            setCookie('photo_url', res.data.data.photo_url, { path: '/' })
-            setTimeout(() => setToCars(true), 2000)
+        if (password !== confirmPassword) {
+            setAlert(true)
         }
-        catch (err) {
-            console.log(err)
-            setIsLoading(false)
+        else {
+            setIsLoading(true)
+            try {
+                const res = await Axios.post(`https://revheads-backend.herokuapp.com/user/register`, {
+                    username: username,
+                    email: email,
+                    password: password,
+                    name: name,
+                    photo_url: photo,
+                    location: location
+                }, { withCredentials: true })
+                setCookie('username', res.data.data.username, { path: '/' })
+                setCookie('userid', res.data.data.id, { path: '/' })
+                setCookie('name', res.data.data.name, { path: '/' })
+                setCookie('location', res.data.data.location, { path: '/' })
+                setCookie('created_at', res.data.data.created_at, { path: '/' })
+                setCookie('photo_url', res.data.data.photo_url, { path: '/' })
+                setTimeout(() => setToCars(true), 2000)
+            }
+            catch (err) {
+                console.log(err)
+                setIsLoading(false)
+            }
         }
     }
 
@@ -49,6 +61,11 @@ function Register(props) {
             <div className="builderProf">
                 {toCars ? <Redirect to={'/mygarage'} /> : null}
                 <h2 className="formTitle">SIGN UP</h2>
+                {alert && <SweetAlert
+                    title={"Passwords do not match"}
+                    onConfirm={onConfirm}
+                />
+                }
                 <Form inline onSubmit={submitUser} className="submitForm" style={{ fontFamily: "Prompt" }}>
                     <FormGroup>
                         <Label for="username" hidden>Name</Label>
@@ -110,6 +127,18 @@ function Register(props) {
                             id="password"
                             placeholder="Password"
                             onChange={(e) => setPassword(e.target.value)} />
+                    </FormGroup>
+                    <br />
+                    <FormGroup>
+                        <Label for="confirmPassword" hidden>Confirm Password</Label>
+                        <Input
+                            type="password"
+                            name="confirmPassword"
+                            id="confirmPassword"
+                            placeholder=" Confirm Password"
+                            value={confirmPassword}
+                            autoComplete="current-password"
+                            onChange={(e) => setConfirmPassword(e.target.value)} />
                     </FormGroup>
                     <br />
                     <LoaderButton isLoading={isLoading}>Submit</LoaderButton>
