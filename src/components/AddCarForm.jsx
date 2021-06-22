@@ -24,7 +24,6 @@ const submitCar = async (e) => {
             photo_url: photo,
             builder: props.builder
         }, { withCredentials: true })
-        console.log(res)
         setIsLoading(false)
         props.toggle()
         props.fetchCars()
@@ -36,7 +35,6 @@ const submitCar = async (e) => {
 }
 
     return (
-        // <div style={{ fontFamily: "Prompt" }}>
         <Form inline onSubmit={submitCar}>
             <FormGroup>
                 <Label for="name" hidden>Name</Label>
@@ -65,6 +63,5 @@ const submitCar = async (e) => {
             {' '}
             <LoaderButton isLoading={isLoading}>Submit</LoaderButton>
         </Form>
-    // </div>
     )
 }

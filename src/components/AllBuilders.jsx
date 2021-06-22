@@ -18,7 +18,7 @@ export default function AllBuilders() {
     return (
         <>
             <Bar />
-            {builders ?
+            {builders &&
                 <div className='builderProf'>
                     {builders.map((user, i) => (
                         <div key={i}>
@@ -37,8 +37,7 @@ export default function AllBuilders() {
                         </div>
                     )
                     )}
-                </div> :
-                null
+                </div>
             }
         </>
     )

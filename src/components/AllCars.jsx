@@ -18,7 +18,7 @@ export default function AllCars() {
     return (
         <>
             <Bar />
-            {cars ?
+            {cars &&
                 <div className='builderProf'>
                     {cars.map((car, i) => (
                         <div key={i}>
@@ -41,8 +41,6 @@ export default function AllCars() {
                     )
                     )}
                 </div>
-                :
-                null
             }
         </>
     )
